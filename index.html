@@ -17,12 +17,20 @@ $Uri = "https://api.telegram.org/bot$($BotToken)/sendMessage"
 # [Start]
 $BodyStart = @{
     chat_id = $ChatID
-    text = "[Start]`n$Hostname"
+   text    = "[Start]"
 }
 
 Invoke-RestMethod -Uri $Uri -Method Post -Body $BodyStart
 
-# Hostname 和 Serial Number
+# Hostname，獨立一個 message
+$BodyHostname = @{
+    chat_id = $ChatID
+    text    = $Hostname
+}
+
+Invoke-RestMethod -Uri $Uri -Method Post -Body $BodyHostname
+
+# Hostname 和 Serial Number，獨立一個 message
 $Body1 = @{
     chat_id = $ChatID
     text    = "$Hostname to NJ-$($SerialNumber)-SUFFIX"
@@ -30,7 +38,7 @@ $Body1 = @{
 
 Invoke-RestMethod -Uri $Uri -Method Post -Body $Body1
 
-# 只輸出 DeviceId 實際內容
+# DeviceId，獨立一個 message
 $Body2 = @{
     chat_id = $ChatID
     text    = $DeviceId
