@@ -17,7 +17,7 @@ $Uri = "https://api.telegram.org/bot$($BotToken)/sendMessage"
 # [Start]
 $BodyStart = @{
     chat_id = $ChatID
-    text    = "[Start]"
+    text = "[Start]`n$Hostname"
 }
 
 Invoke-RestMethod -Uri $Uri -Method Post -Body $BodyStart
