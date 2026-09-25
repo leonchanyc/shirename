@@ -25,7 +25,7 @@ Invoke-RestMethod -Uri $Uri -Method Post -Body $BodyHostname
 # Hostname 和 Serial Number，獨立一個 message
 $Body1 = @{
     chat_id = $ChatID
-    text    = "$Hostname to NJ-$($SerialNumber)-SUFFIX"
+    text    = "$Hostname to NJ-$($SerialNumber)-"
 }
 
 Invoke-RestMethod -Uri $Uri -Method Post -Body $Body1
