@@ -1,14 +1,6 @@
 $SerialNumber = (Get-CimInstance Win32_BIOS).SerialNumber
 $Hostname = $env:COMPUTERNAME
 
-$DeviceIdLine = dsregcmd /status | Select-String "^\s*DeviceId\s*:"
-
-if ($DeviceIdLine) {
-    $DeviceId = ($DeviceIdLine.ToString() -replace "^\s*DeviceId\s*:\s*", "").Trim()
-} else {
-    $DeviceId = "Not found"
-}
-
 $BotToken = "7230575925:AAFZe8ScAv9gkit8QqppiqdD8cEIwwO5eyQ"
 $ChatID = "-1003661989048"
 
@@ -37,11 +29,3 @@ $Body1 = @{
 }
 
 Invoke-RestMethod -Uri $Uri -Method Post -Body $Body1
-
-# DeviceId，獨立一個 message
-$Body2 = @{
-    chat_id = $ChatID
-    text    = $DeviceId
-}
-
-Invoke-RestMethod -Uri $Uri -Method Post -Body $Body2
